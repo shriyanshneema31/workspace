@@ -7,7 +7,12 @@ class StringCalculator
     delimiters = /,|\n/
     delimiters, numbers = parse_custom_delimiter(numbers) if numbers.start_with?("//")
 
-    numbers.split(delimiters).map(&:to_i).sum
+    numbers = numbers.split(delimiters).map(&:to_i)
+
+    negatives = numbers.select { |number| number < 0 }
+    raise "negative numbers not allowed: #{negatives.join(', ')}" if negatives.any?
+
+    numbers.sum
   end
 
   private
