@@ -4,6 +4,7 @@ class StringCalculator
 
     return numbers.to_i if numbers.size == 1
 
-    numbers.split(",").map(&:to_i).sum
+    delimiters = /,|\n/
+    numbers.split(delimiters).map(&:to_i).sum
   end
 end
